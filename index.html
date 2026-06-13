@@ -40,13 +40,6 @@
         }
 
         /* ترتيب العناصر داخل الشريط الجانبي */
-        .header-top {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* إعادة ترتيب الأقسام: التواصل الاجتماعي أولاً ثم REFERENCE */
         .social-links-side {
             order: 1;
             margin-top: 20px;
@@ -139,12 +132,10 @@
             display: block;
             transition: transform 0.3s ease;
         }
-        /* جعل الصور الستة الأولى مربعة WITHOUT CROP (contain) */
         @media (min-width: 993px) {
             .sidebar-ref-item:not(.wide):not(.super-wide) img {
                 aspect-ratio: 1 / 1;
-                object-fit: contain;
-                background-color: #0a0a0a;
+                object-fit: cover;
             }
         }
         .sidebar-ref-item img:hover {
@@ -167,7 +158,7 @@
             background-color: #1a1a1a;
         }
 
-        /* ========== أيقونات التواصل الاجتماعي الفاخرة - اللون الأصفر الذهبي ========== */
+        /* ========== أيقونات التواصل الاجتماعي الفاخرة ========== */
         .social-links-side h4 {
             color: #ffffff80;
             font-size: 0.8rem;
@@ -361,7 +352,6 @@
             font-weight: 600;
         }
 
-        /* ========== أيقونات الموبايل بنفس النمط الفاخر (بدون تغيير) ========== */
         .mobile-social-icons {
             display: flex;
             justify-content: center;
@@ -492,7 +482,6 @@
             border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        /* SERVICES GRID - Desktop: 2 colonnes (2x2), Mobile: 1 colonne */
         .services-grid {
             display: grid;
             gap: 30px;
@@ -584,7 +573,7 @@
             border-radius: 60px;
         }
 
-        /* ========== REFERENCE GALLERY (PAGE PRINCIPALE) ========== */
+        /* ========== REFERENCE GALLERY (PAGE PRINCIPALE) - MODIFICATION ICI ========== */
         .ref-gallery {
             max-width: 1200px;
             margin: 0 auto;
@@ -607,14 +596,29 @@
         }
         .ref-item img {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
             display: block;
             transition: transform 0.4s ease;
         }
         .ref-item img:hover {
             transform: scale(1.05);
         }
+        
+        /* Pour Desktop: les 6 premières images deviennent carrées SANS recadrage (contain) */
+        @media (min-width: 993px) {
+            .ref-item:not(.wide):not(.super-wide) {
+                aspect-ratio: 1 / 1;
+                background-color: #f5f5f5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .ref-item:not(.wide):not(.super-wide) img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+        
         .ref-item.wide {
             grid-column: span 2;
         }
@@ -630,15 +634,19 @@
             object-fit: contain;
             background-color: #f5f5f5;
         }
-        @media (max-width: 768px) {
-            .ref-item img {
+        
+        /* Mobile: aucun changement, tout reste comme avant */
+        @media (max-width: 992px) {
+            .ref-item:not(.wide):not(.super-wide) {
+                aspect-ratio: unset;
+            }
+            .ref-item:not(.wide):not(.super-wide) img {
                 height: 180px;
+                object-fit: cover;
             }
             .ref-item.wide img {
                 height: 200px;
-            }
-            .ref-item.super-wide img {
-                height: auto;
+                object-fit: cover;
             }
         }
 
@@ -674,7 +682,6 @@
             #header-outer.open {
                 transform: translateX(0);
             }
-            /* إعادة تعيين الترتيب للهاتف ليبقي كما كان */
             .social-links-side {
                 order: unset;
                 margin-top: 0;
@@ -704,7 +711,6 @@
             .mobile-social-section {
                 display: block;
             }
-            /* إرجاع الصور إلى شكلها الأصلي في الهاتف (غير مربعة) */
             .sidebar-ref-item:not(.wide):not(.super-wide) img {
                 aspect-ratio: unset;
                 height: 80px;
@@ -751,7 +757,6 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
-        <!-- قسم التواصل الاجتماعي أصبح فوق REFERENCE -->
         <div class="social-links-side">
             <h4>SUIVEZ-MOI</h4>
             <div class="social-icons-side">
