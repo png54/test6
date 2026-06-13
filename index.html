@@ -39,6 +39,28 @@
             overflow-y: auto;
         }
 
+        /* ترتيب العناصر داخل الشريط الجانبي */
+        .header-top {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* إعادة ترتيب الأقسام: التواصل الاجتماعي أولاً ثم REFERENCE */
+        .social-links-side {
+            order: 1;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-reference {
+            order: 2;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
         .logo-area {
             text-align: center;
             margin-bottom: 50px;
@@ -94,12 +116,6 @@
         }
 
         /* ========== SIDEBAR REFERENCE STYLE ========== */
-        .sidebar-reference {
-            margin-top: 40px;
-            margin-bottom: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
         .sidebar-reference h4 {
             color: #D4AF37;
             font-size: 1rem;
@@ -118,10 +134,16 @@
         }
         .sidebar-ref-item img {
             width: 100%;
-            height: 80px;
-            object-fit: cover;
+            height: auto;
             display: block;
             transition: transform 0.3s ease;
+        }
+        /* جعل الصور الستة الأولى مربعة (فقط في الحاسوب) */
+        @media (min-width: 993px) {
+            .sidebar-ref-item:not(.wide):not(.super-wide) img {
+                aspect-ratio: 1 / 1;
+                object-fit: cover;
+            }
         }
         .sidebar-ref-item img:hover {
             transform: scale(1.05);
@@ -130,7 +152,8 @@
             grid-column: span 2;
         }
         .sidebar-ref-item.wide img {
-            height: 100px;
+            height: auto;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
         }
         .sidebar-ref-item.super-wide {
@@ -148,6 +171,7 @@
             font-size: 0.8rem;
             margin-bottom: 15px;
             letter-spacing: 2px;
+            text-align: center;
         }
 
         .social-icons-side {
@@ -335,7 +359,7 @@
             font-weight: 600;
         }
 
-        /* ========== أيقونات الموبايل بنفس النمط الفاخر ========== */
+        /* ========== أيقونات الموبايل بنفس النمط الفاخر (بدون تغيير) ========== */
         .mobile-social-icons {
             display: flex;
             justify-content: center;
@@ -638,6 +662,7 @@
             }
         }
 
+        /* ========== RESPONSIVE: DESIGN MOBILE SANS AUCUN CHANGEMENT ========== */
         @media (max-width: 992px) {
             #header-outer {
                 transform: translateX(-100%);
@@ -646,6 +671,17 @@
             }
             #header-outer.open {
                 transform: translateX(0);
+            }
+            /* إعادة تعيين الترتيب للهاتف ليبقي كما كان */
+            .social-links-side {
+                order: unset;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            .sidebar-reference {
+                order: unset;
+                margin-top: 40px;
+                margin-bottom: 40px;
             }
             .mobile-menu-btn {
                 display: flex;
@@ -665,6 +701,12 @@
             }
             .mobile-social-section {
                 display: block;
+            }
+            /* إرجاع الصور إلى شكلها الأصلي في الهاتف (غير مربعة) */
+            .sidebar-ref-item:not(.wide):not(.super-wide) img {
+                aspect-ratio: unset;
+                height: 80px;
+                object-fit: cover;
             }
         }
 
@@ -706,20 +748,8 @@
                 <li><a href="#reference">Référence</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="sidebar-reference">
-                <h4>RÉFÉRENCE</h4>
-                <div class="sidebar-ref-grid">
-                    <div class="sidebar-ref-item"><img src="https://b.top4top.io/p_3814b6rcm1.jpg" alt="ref1"></div>
-                    <div class="sidebar-ref-item"><img src="https://c.top4top.io/p_38144se392.jpg" alt="ref2"></div>
-                    <div class="sidebar-ref-item"><img src="https://d.top4top.io/p_3814g6j353.jpg" alt="ref3"></div>
-                    <div class="sidebar-ref-item"><img src="https://e.top4top.io/p_38145if064.jpg" alt="ref4"></div>
-                    <div class="sidebar-ref-item"><img src="https://f.top4top.io/p_3814bsjgd5.jpg" alt="ref5"></div>
-                    <div class="sidebar-ref-item"><img src="https://g.top4top.io/p_38141flok6.jpg" alt="ref6"></div>
-                    <div class="sidebar-ref-item wide"><img src="https://h.top4top.io/p_3814siazc7.jpg" alt="ref7"></div>
-                    <div class="sidebar-ref-item super-wide"><img src="https://e.top4top.io/p_38147jamf1.jpg" alt="ref8 large"></div>
-                </div>
-            </div>
         </div>
+        <!-- قسم التواصل الاجتماعي أصبح فوق REFERENCE -->
         <div class="social-links-side">
             <h4>SUIVEZ-MOI</h4>
             <div class="social-icons-side">
@@ -728,6 +758,19 @@
                 <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
                 <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="sidebar-reference">
+            <h4>RÉFÉRENCE</h4>
+            <div class="sidebar-ref-grid">
+                <div class="sidebar-ref-item"><img src="https://b.top4top.io/p_3814b6rcm1.jpg" alt="ref1"></div>
+                <div class="sidebar-ref-item"><img src="https://c.top4top.io/p_38144se392.jpg" alt="ref2"></div>
+                <div class="sidebar-ref-item"><img src="https://d.top4top.io/p_3814g6j353.jpg" alt="ref3"></div>
+                <div class="sidebar-ref-item"><img src="https://e.top4top.io/p_38145if064.jpg" alt="ref4"></div>
+                <div class="sidebar-ref-item"><img src="https://f.top4top.io/p_3814bsjgd5.jpg" alt="ref5"></div>
+                <div class="sidebar-ref-item"><img src="https://g.top4top.io/p_38141flok6.jpg" alt="ref6"></div>
+                <div class="sidebar-ref-item wide"><img src="https://h.top4top.io/p_3814siazc7.jpg" alt="ref7"></div>
+                <div class="sidebar-ref-item super-wide"><img src="https://e.top4top.io/p_38147jamf1.jpg" alt="ref8 large"></div>
             </div>
         </div>
     </div>
